@@ -15,11 +15,9 @@ class SalesmanService(
     private val paEc: PasswordEncoder
 ) {
     fun findSalesmanByEmail(email: String) = salesmanRepository.findSalesmanByEmail(email)
-    fun findSalesmanByUser(user: User) = salesmanRepository.findSalesmanByUser(user)
     fun doesSalesmanEmailExist(email: String) = findSalesmanByEmail(email) != null
     fun saveSalesman(dto: CreateSalesmanDTO) {
         val salesman = Salesman(
-            id = 0,
             user = User(
                 id = 0,
                 firstName = dto.firstName,

@@ -7,7 +7,7 @@ import javax.persistence.*
 @Table(name = "users")
 class User (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id", unique = true, nullable = false)
     var id: Long = 0,
     @Column(unique = false, nullable = false)

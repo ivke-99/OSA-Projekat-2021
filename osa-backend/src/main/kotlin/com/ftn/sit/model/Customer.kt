@@ -8,14 +8,14 @@ import javax.persistence.*
 @Table(name = "customers")
 class Customer (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id", unique = true, nullable = false)
-    var id: Long?,
+    var id: Long = 0,
     @OneToOne(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     @JoinColumn(name = "user_id")
     @MapsId
-    var user: User?,
-    var address: String?,
+    var user: User,
+    var address: String,
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "customer")
     var orders: MutableList<Order> = mutableListOf()
 )

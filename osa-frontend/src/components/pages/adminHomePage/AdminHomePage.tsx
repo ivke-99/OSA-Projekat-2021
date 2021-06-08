@@ -3,7 +3,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { accessTokenWithUsername } from "../../../recoil/tokens";
 
-const CustomerHomePage = () => {
+const AdminHomePage = () => {
     const username = useRecoilValue(accessTokenWithUsername);
     return (
         <Fade in={true}>
@@ -12,4 +12,4 @@ const CustomerHomePage = () => {
     );
 };
 
-export default CustomerHomePage;
+export default AdminHomePage;

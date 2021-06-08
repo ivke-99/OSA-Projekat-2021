@@ -27,7 +27,7 @@ const UpdateProductTabPanel: React.FC = () => {
         );
     }
     return (
-        <SimpleGrid columns={[1, 2]} spacing={["10px", "20px"]}>
+        <SimpleGrid columns={[1, 4]} spacing={["10px", "20px"]}>
             {products.map((e: any, index: number) => (
                 <ProductInfoCard product={e} key={index} fetchCallback={reFetchIt} />
             ))}

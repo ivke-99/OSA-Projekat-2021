@@ -1,4 +1,4 @@
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
@@ -10,6 +10,8 @@ import AuthInitializer from "./components/authInitializer/AuthInitializer";
 import AxiosInterception from "./components/axiosInterception/AxiosInterception";
 import { BrowserRouter as Router } from "react-router-dom";
 import axios from "axios";
+import { mode } from "@chakra-ui/theme-tools";
+import { Dict } from "@chakra-ui/utils";
 
 const GlobalStyles = css`
     /*
@@ -22,6 +24,31 @@ const GlobalStyles = css`
         box-shadow: none;
     }
 `;
+
+const styles = {
+    global: (props: Dict<any>) => ({
+        body: {
+            color: mode("gray.500", "whiteAlpha.900")(props),
+            bg: mode("gray.300", "#141214")(props),
+        },
+    }),
+};
+
+const components = {
+    Drawer: {
+        // setup light/dark mode component defaults
+        baseStyle: (props: Dict<any>) => ({
+            dialog: {
+                bg: mode("white", "#141214")(props),
+            },
+        }),
+    },
+};
+
+const theme = extendTheme({
+    components,
+    styles,
+});
 
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
@@ -41,7 +68,7 @@ ReactDOM.render(
     <React.StrictMode>
         <ColorModeScript />
         <RecoilRoot>
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
                 <Global styles={GlobalStyles} />
                 <AuthInitializer>
                     <Router>

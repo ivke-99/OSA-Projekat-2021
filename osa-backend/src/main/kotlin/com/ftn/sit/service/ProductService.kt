@@ -49,9 +49,8 @@ class ProductService(
                 name = dto.productName,
                 price = dto.price,
                 description = dto.description,
-                salesman = findSalesmanByUsername(username),
                 productImage = "",
-                orderItems = mutableListOf(),
+                salesman = findSalesmanByUsername(username),
             )
             productRepository.save(product)
             BlankResult.Ok

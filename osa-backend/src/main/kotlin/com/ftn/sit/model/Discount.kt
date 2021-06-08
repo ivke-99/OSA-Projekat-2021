@@ -6,23 +6,19 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "discounts")
-class Discount {
+class Discount (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "discount_id", unique = true, nullable = false)
-    private val id: Int? = null
-
+    var id: Long = 0,
     @Column(nullable = false)
-    private val percentage: Int? = null
-
+    var percentage: Int,
     @Column(name = "start_date", nullable = false)
-    private val startDate: LocalDate? = null
-
+    var startDate: LocalDate,
     @Column(name = "end_date", nullable = false)
-    private val endDate: LocalDate? = null
-    private val description: String? = null
-
+    var endDate: LocalDate,
+    var description: String,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salesman_id", nullable = false)
-    private val salesman: Salesman? = null
-}
+    var salesman: Salesman
+)

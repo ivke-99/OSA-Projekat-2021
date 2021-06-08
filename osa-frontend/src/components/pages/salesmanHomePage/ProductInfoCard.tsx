@@ -60,13 +60,12 @@ const ProductInfoCard: React.FC<ProductInfoProps> = (props) => {
     return (
         <>
             <FormModal isOpen={isOpen} onClose={onClose} productName={product.productName} />
-            <Box borderWidth={1} borderRadius="lg" pt={3} pl={4} pr={2} pb={3}>
+            <Box p={2} borderWidth={1} borderRadius="lg">
                 <Flex
                     direction="column"
                     alignItems="flex-start"
                     wrap="nowrap"
-                    mb={2}
-                    padding={3}
+                    p={2}
                     fontSize={["sm", "sm", "md", "lg"]}
                 >
                     <Box width="95%">
@@ -84,7 +83,11 @@ const ProductInfoCard: React.FC<ProductInfoProps> = (props) => {
                         </Text>
                     </Box>
                 </Flex>
-                {<Button onClick={onOpen}>Edit product</Button>}
+                {
+                    <Button mr={2} onClick={onOpen}>
+                        Edit product
+                    </Button>
+                }
                 <Button onClick={(_) => deleteProduct(product.productName)}>Delete product</Button>
             </Box>
         </>

@@ -34,9 +34,9 @@ const SignUpFormSalesman: React.FC = () => {
     const primaryColor = useColorModeValue("blue.800", "blue.100");
 
     const formSchema = yup.object().shape({
-        firstName: yup.string().trim().required("First name is a required field."),
-        surname: yup.string().trim().required("Last name is a required field."),
-        username: yup.string().trim().required("Username is a required field."),
+        firstName: yup.string().trim().required("First name is a required field.").min(2).max(30),
+        surname: yup.string().trim().required("Last name is a required field.").min(2).max(30),
+        username: yup.string().trim().required("Username is a required field.").min(5).max(30),
         password: yup
             .string()
             .password()
@@ -76,7 +76,7 @@ const SignUpFormSalesman: React.FC = () => {
             .trim()
             .required("Country is a required field."),
         email: yup.string().email("Email must be a valid entry.").trim().required("Email is required."),
-        companyName: yup.string().required("Company name is required."),
+        companyName: yup.string().required("Company name is required.").min(5).max(30),
     });
     const { register, handleSubmit, formState } = useForm<SignUpFormInputsSalesman>({
         mode: "onChange",

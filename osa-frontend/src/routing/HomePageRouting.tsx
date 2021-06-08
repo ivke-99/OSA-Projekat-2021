@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
+import AdminHomePage from "../components/pages/adminHomePage/AdminHomePage";
 import CustomerHomePage from "../components/pages/customerHomePage/CustomerHomePage";
 import LandingPage from "../components/pages/LandingPage";
 import SalesmanHomePage from "../components/pages/salesmanHomePage/SalesmanHomePage";
@@ -11,6 +12,8 @@ const HomePageRouting: React.FC = () => {
         return <CustomerHomePage />;
     } else if (roles.isSalesman) {
         return <SalesmanHomePage />;
+    } else if (roles.isAdmin) {
+        return <AdminHomePage />;
     } else {
         return <LandingPage />;
     }

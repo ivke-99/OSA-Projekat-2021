@@ -20,23 +20,26 @@ import javax.validation.constraints.Size
 )
 class CreateCustomerDTO (
     @field:NotBlank
-    @field:Size(min = 2, max = 200)
+    @field:Size(min = 2, max = 30)
     var firstName: String,
 
     @field:NotBlank
-    @field:Size(min = 2, max = 200)
+    @field:Size(min = 2, max = 30)
     var surname: String,
 
     @field:NotBlank
+    @field:Size(min = 5, max = 30)
     @field:UniqueUsername(message = "Username already exists.")
     var username:String,
 
     @field:ValidPassword
+    @field:Size(min = 6, max = 16)
     @field:NotBlank
     var password: String,
 
 
     @field:ValidPassword
+    @field:Size(min = 6, max = 16)
     @field:NotBlank
     var passwordAgain: String,
 
@@ -66,14 +69,15 @@ class CreateCustomerDTO (
 )
 class CreateSalesmanDTO(
     @field:NotBlank
-    @field:Size(min = 2, max = 200)
+    @field:Size(min = 2, max = 30)
     var firstName: String,
 
     @field:NotBlank
-    @field:Size(min = 2, max = 200)
+    @field:Size(min = 2, max = 30)
     var surname: String,
 
     @field:NotBlank
+    @field:Size(min = 5, max = 30)
     @field:UniqueUsername(message = "Username already exists.")
     var username:String,
 
@@ -82,10 +86,12 @@ class CreateSalesmanDTO(
     var email: String,
 
     @field:ValidPassword
+    @field:Size(min = 6, max = 16)
     @field:NotBlank
     var password: String,
 
     @field:ValidPassword
+    @field:Size(min = 6, max = 16)
     @field:NotBlank
     var passwordAgain: String,
 

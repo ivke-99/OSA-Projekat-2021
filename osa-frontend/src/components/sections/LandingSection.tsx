@@ -26,7 +26,7 @@ const LandingSection: React.FC<LandingSectionProps> = ({
 }) => {
     const isAuth = useRecoilValue(accessTokenIsAuthenticated);
 
-    const primaryColor = useColorModeValue("blue.700", "blue.100");
+    const primaryColor = useColorModeValue("yellow.100", "yellow.500");
     return (
         <Flex
             align="center"

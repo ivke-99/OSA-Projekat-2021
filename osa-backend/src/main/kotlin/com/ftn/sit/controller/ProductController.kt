@@ -27,6 +27,7 @@ class ProductController(
     }
 
     @GetMapping("/{productName}")
+    @PreAuthorize("hasAuthority('SALESMAN')")
     fun fetchProduct(@PathVariable("productName") productName: String, principal: Principal): ResponseEntity<Any> =
         productService.findProductBySalesmanName(productName, principal)?.let {
             ok(ViewProductDTO(it))

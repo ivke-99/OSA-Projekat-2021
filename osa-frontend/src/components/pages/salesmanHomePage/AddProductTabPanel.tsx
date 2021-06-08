@@ -42,9 +42,9 @@ const AddProductTabPanel: React.FC<{ tabsHandle: (index: number) => void }> = (p
     const primaryColor = useColorModeValue("blue.800", "blue.100");
 
     const formSchema = yup.object().shape({
-        productName: yup.string().trim().required("Product name is required."),
-        price: yup.number().required("Price of product is required."),
-        description: yup.string().trim().required("Product description is required."),
+        productName: yup.string().trim().min(3).max(10).required("Product name is required."),
+        price: yup.number().required("Price of product is required.").positive().min(10).max(500),
+        description: yup.string().min(3).max(50).trim().required("Product description is required."),
     });
 
     const { register, handleSubmit, formState, control } = useForm<ProductDTO>({
@@ -76,7 +76,7 @@ const AddProductTabPanel: React.FC<{ tabsHandle: (index: number) => void }> = (p
                     status: "success",
                     isClosable: true,
                 });
-                tabsHandle(1);
+                tabsHandle(0);
             })
             .catch((err) => {
                 let messages: string[] =
@@ -136,12 +136,12 @@ const AddProductTabPanel: React.FC<{ tabsHandle: (index: number) => void }> = (p
                         <FormErrorMessage>{errors?.description?.message}</FormErrorMessage>
                     </FormControl>
                     <FormControl isInvalid={!!errors?.price?.message} errortext={errors?.price?.message} isRequired>
-                        <FormLabel>Price of appointment:</FormLabel>
+                        <FormLabel color={primaryColor}>Price of product:</FormLabel>
                         <Controller
                             control={control}
                             name="price"
                             render={({ field: { name, ...rest } }) => (
-                                <NumberInput step={0.1} min={1} max={1000000} {...rest}>
+                                <NumberInput step={0.1} min={1} max={10000} {...rest}>
                                     <NumberInputField name={name} />
                                     <NumberInputStepper>
                                         <NumberIncrementStepper />
