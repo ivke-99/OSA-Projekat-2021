@@ -16,7 +16,7 @@ class Startup(
     private val passwordEncoder: PasswordEncoder,
     private val salesmanRepository: SalesmanRepository
 ): ApplicationRunner {
-    override fun run(args: ApplicationArguments?) {
+    override fun run(args: ApplicationArguments?) {/*
         var user = User(
             id = 0, firstName = "Marko", surname = "Markovic", "marko123" ,"123456", active = true,
             roleList = mutableListOf(Role.SALESMAN)
@@ -34,6 +34,6 @@ class Startup(
             roleList = mutableListOf(Role.ADMIN)
         ).apply { password = passwordEncoder.encode(password) }
         user2 = userRepository.save(user2)
-
+*/
     }
 }

@@ -8,4 +8,5 @@ interface ProductRepository: JpaRepository<Product, Long> {
     fun findByNameAndSalesman(name: String, salesman: Salesman) : Product?
     fun findByNameAndSalesmanUserUsername(name: String,username: String) : Product?
     fun findAllBySalesmanUserUsername(name: String) : MutableList<Product>
+    fun findAllByIdIn(idList: MutableList<Long>) : MutableList<Product>
 }

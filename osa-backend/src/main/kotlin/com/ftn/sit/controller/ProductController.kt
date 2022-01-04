@@ -21,7 +21,11 @@ class ProductController(
 ) {
     @GetMapping
     @PreAuthorize("hasAuthority('SALESMAN')")
-    fun fetchSalesmanProducts(principal: Principal): ResponseEntity<Any> {
+    fun fetchSalesmanProducts(@RequestParam(required = false) searchTerm: String, principal: Principal): ResponseEntity<Any> {
+        if (searchTerm.isNotBlank()) {
+            val salesmanESProducts = productService.findAllBySearchTerm(searchTerm, principal)
+            return ok(salesmanESProducts)
+        }
         val salesmanProducts = productService.findAllProductsBySalesmanName(principal.name)
         return ok(salesmanProducts)
     }
