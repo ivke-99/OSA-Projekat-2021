@@ -1,0 +1,8 @@
+node_modules
+*.sublime*
+*.yml
+.git
+.gitignore
+build
+Dockerfile
+

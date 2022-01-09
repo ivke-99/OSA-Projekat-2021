@@ -15,7 +15,6 @@ class CustomerService(
 ) {
     fun saveCustomer(dto: CreateCustomerDTO) {
         val customer = Customer(
-            id = 0,
             user = User(
                 id = 0,
                 firstName = dto.firstName,

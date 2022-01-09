@@ -4,6 +4,12 @@ export interface ProductDTO {
     price: number;
 }
 
+export interface OrderDTO {
+    isAnonComment: boolean;
+    timeOfOrder: Date;
+    comment: string;
+}
+
 export interface ProductFormModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -12,6 +18,10 @@ export interface ProductFormModalProps {
 
 export interface ProductProps {
     product: ProductDTO;
+}
+
+export interface OrderInfoProps {
+    order: OrderDTO;
 }
 
 export interface ProductInfoProps extends ProductProps {

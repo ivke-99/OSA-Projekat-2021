@@ -13,7 +13,7 @@ class RestClientConfig : AbstractElasticsearchConfiguration() {
     @Bean
     override fun elasticsearchClient(): RestHighLevelClient {
         val clientConfiguration = ClientConfiguration.builder()
-            .connectedTo("elasticsearch:9200")
+            .connectedTo("localhost:9200") //elasticsearch
             .build()
         return RestClients.create(clientConfiguration).rest()
     }

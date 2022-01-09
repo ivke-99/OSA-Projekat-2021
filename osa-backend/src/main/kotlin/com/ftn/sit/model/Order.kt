@@ -11,12 +11,12 @@ import javax.persistence.*
 @Table(name = "orders")
 class Order(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_id", unique = true, nullable = false)
-    var id: Int? = null,
+    var id: Long = 0,
 
     @Column(nullable = false)
-    var timeOfOrder: LocalDateTime,
+    var timeOfOrder: LocalDateTime = LocalDateTime.now(),
 
     @Column(nullable = false)
     var isDelivered: Boolean? = null,
@@ -28,14 +28,18 @@ class Order(
     var comment: String? = null,
 
     @Column(nullable = true)
-    var isAnonComment: Boolean? = null,
+    var isAnonComment: Boolean = false,
 
     @Column(nullable = true)
     var isArchivedComment: Boolean? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    var customer: Customer? = null,
+    var customer: Customer,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "salesman_id", nullable = false)
+    var salesman: Salesman,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     var orderItemList: Set<OrderItem> = HashSet()

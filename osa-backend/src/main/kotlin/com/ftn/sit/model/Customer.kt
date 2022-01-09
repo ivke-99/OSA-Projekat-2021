@@ -7,10 +7,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "customers")
 class Customer (
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "customer_id", unique = true, nullable = false)
-    var id: Long = 0,
     @OneToOne(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
     @JoinColumn(name = "user_id")
     @MapsId
@@ -19,3 +15,7 @@ class Customer (
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "customer")
     var orders: MutableList<Order> = mutableListOf()
 )
+{
+    @Id
+    var id: Long = user.id
+}

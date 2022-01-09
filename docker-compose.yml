@@ -1,0 +1,85 @@
+version: '3.1'
+services:
+  osa-backend:
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    container_name: osa-backend
+    build:
+      context: ./osa-backend/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/postgres
+    image: osa-backend:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - elastic
+
+  osa-frontend:
+    container_name: osa-frontend
+    image: osa-frontend
+    build:
+      context: ./osa-frontend/
+    volumes:
+      - './osa-frontend/node_modules'
+    ports:
+      - "3000:3000"
+    networks:
+      - elastic
+
+  postgres_db:
+    image: postgres:13.5
+    container_name: postgres_db
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    mem_limit: 1000m
+    mem_reservation: 300m
+    user: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - elastic
+
+  elasticsearch:
+    image: elasticsearch-sr:latest 
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1000m
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic
+    healthcheck:
+      test: curl -u elastic:elastic -s -f elasticsearch:9200/_cat/health >/dev/null || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  elasticsearch:
+    driver: local
+  postgres_db:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
