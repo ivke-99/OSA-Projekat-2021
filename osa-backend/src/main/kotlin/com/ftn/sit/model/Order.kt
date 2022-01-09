@@ -3,39 +3,40 @@ package com.ftn.sit.model
 import java.util.HashSet
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 
 @Entity
 @Table(name = "orders")
-class Order {
+class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", unique = true, nullable = false)
-    private val id: Int? = null
+    var id: Int? = null,
 
     @Column(nullable = false)
-    private val timeOfOrder: LocalDate? = null
+    var timeOfOrder: LocalDateTime,
 
     @Column(nullable = false)
-    private val isDelivered: Boolean? = null
+    var isDelivered: Boolean? = null,
 
     @Column(nullable = false)
-    private val grade: Int? = null
+    var grade: Int? = null,
 
     @Column(nullable = true)
-    private val comment: String? = null
+    var comment: String? = null,
 
     @Column(nullable = true)
-    private val isAnonComment: Boolean? = null
+    var isAnonComment: Boolean? = null,
 
     @Column(nullable = true)
-    private val isArchivedComment: Boolean? = null
+    var isArchivedComment: Boolean? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private val customer: Customer? = null
+    var customer: Customer? = null,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private val orderItemList: Set<OrderItem> = HashSet()
-}
+    var orderItemList: Set<OrderItem> = HashSet()
+)
