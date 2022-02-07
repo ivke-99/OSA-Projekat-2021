@@ -3,9 +3,13 @@ package com.ftn.sit.service
 import com.ftn.sit.model.dto.ViewOrderDTO
 import com.ftn.sit.repository.OrderESRepository
 import com.ftn.sit.repository.OrderRepository
-import com.ftn.sit.repository.UserRepository
+import org.apache.lucene.search.join.ScoreMode
+import org.elasticsearch.index.query.QueryBuilder
+import org.elasticsearch.index.query.QueryBuilders
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder
 import org.springframework.stereotype.Service
 import java.security.Principal
+
 
 @Service
 class OrderService(
@@ -23,7 +27,7 @@ class OrderService(
 
     fun findAllBySearchTerm(searchTerm: String, principal: Principal): List<ViewOrderDTO> {
         val user = userService.findUserByUsername(principal.name)!!
-        val esOrders = orderESRepository.findAllBySalesmanIdAndCommentLike(user.id, searchTerm)
+        val esOrders = orderESRepository.findAllBySalesmanIdAndCommentLike(user.id, searchTerm.replace(" ", "%20"))
         val idList = mutableListOf<Long>()
         for (order in esOrders) {
             idList.add(order.id)

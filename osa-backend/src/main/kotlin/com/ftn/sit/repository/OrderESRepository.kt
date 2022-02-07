@@ -1,6 +1,7 @@
 package com.ftn.sit.repository
 
 import com.ftn.sit.model.elastic.OrderES
+import org.springframework.data.elasticsearch.annotations.Query
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository
 

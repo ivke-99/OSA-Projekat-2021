@@ -25,7 +25,7 @@ const UpdateProductTabPanel: React.FC = () => {
 
     return (
         <>
-            <Input mt={1} mb={4} width={250} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search' />
+            <Input mt={1} mb={4} width={250} onChange={(e) => setSearchTerm(e?.target?.value?.trim())} placeholder='Search' />
             {orders.length === 0 ? <Center>
                 <Heading as="h3">No orders yet!</Heading>
             </Center>

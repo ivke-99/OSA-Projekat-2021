@@ -31,7 +31,7 @@ class ProductService(
 
     fun findAllBySearchTerm(searchTerm: String, principal: Principal): List<ViewProductDTO> {
         val user = userService.findUserByUsername(principal.name)!!
-        val esProducts = productESRepository.findAllByNameLikeAndSalesmanId(searchTerm, user.id)
+        val esProducts = productESRepository.findAllByNameLikeAndSalesmanId(searchTerm.replace(" ", "%20"), user.id)
         val idList = mutableListOf<Long>()
         for (product in esProducts) {
             idList.add(product.id)

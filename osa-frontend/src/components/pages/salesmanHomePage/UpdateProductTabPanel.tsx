@@ -11,13 +11,8 @@ const UpdateProductTabPanel: React.FC = () => {
     const reFetchIt = () => setFetchIt(!fetchIt);
 
     const fetchAndSetProducts = useCallback(() => {
-        axios
-            .get("products",
-                {
-                    params: {
-                        searchTerm: searchTerm
-                    }
-                })
+        let url = encodeURI(`products?searchTerm=${searchTerm}`)
+        axios.get(url)
             .then(({ data }) => setProducts(data))
             .catch((err) => console.log(err));
     }, [setProducts, searchTerm]);
@@ -27,7 +22,7 @@ const UpdateProductTabPanel: React.FC = () => {
 
     return (
         <>
-            <Input mt={1} mb={4} width={250} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search' />
+            <Input mt={1} mb={4} width={250} onChange={(e) => setSearchTerm(e?.target?.value?.trim())} placeholder='Search' />
             {products.length === 0 ? <Center>
                 <Heading as="h3">No products yet!</Heading>
             </Center>
